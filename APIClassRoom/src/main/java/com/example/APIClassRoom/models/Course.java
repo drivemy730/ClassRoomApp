@@ -3,7 +3,9 @@ package com.example.APIClassRoom.models;
 import com.example.APIClassRoom.helpers.UserType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 
 
 @Entity
@@ -18,7 +20,34 @@ public class Course
     private String courseName;
 
     @Column( name = "id_teacher", nullable = false)
-    private Integer teacherId;
+    private Integer teacherId; //FK
+
+    //RELATIONS
+
+    //Relationship with Teacher
+    @ManyToOne
+    @JoinColumn(name="fk_teacher", referencedColumnName = "id_teacher")
+    @JsonBackReference
+    Teacher teacher;
+
+    // relationship with Subject
+    @OneToMany(mappedBy = "course")
+    @JsonManagedReference
+    private List<Subject> subjectList;
+
+    // relationship with inscription
+    @OneToMany(mappedBy = "course")
+    @JsonManagedReference
+    private List<Inscription> inscriptionList;
+
+    // relationship with attendance
+    @OneToMany(mappedBy = "course")
+    @JsonManagedReference
+    private List<AttendanceRecord> attendanceRecordList;
+
+
+
+
 
 
     //Constructor
