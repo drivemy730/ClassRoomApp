@@ -4,6 +4,7 @@ import com.example.APIClassRoom.helpers.AttendanceRecordState;
 import jakarta.persistence.Entity;
 
 import java.util.Date;
+import jakarta.persistence.*;
 
 
 
@@ -11,17 +12,22 @@ import java.util.Date;
 public class AttendanceRecord
 {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_attendance")
     private Integer attendanceId;
 
+    @Column( name = "id_student", nullable = false)
     private Integer studentId;
 
+    @Column( name = "id_course", nullable = false)
     private Integer courseId;
 
+    @Column( name = "attendance_date", nullable = false)
     private Date attendanceDate;
 
-
-
+    @Column( nullable  = false)
+    @Enumerated(EnumType.STRING) // usé esta anotacion para que JPA traiga el string de la clase y no su posicion.
     private AttendanceRecordState attendanceRecordState;
 
 
@@ -88,6 +94,14 @@ public class AttendanceRecord
 
 
 }
+
+
+
+
+
+
+
+
 
 
 
