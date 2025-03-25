@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import java.sql.Timestamp;
 import java.util.Date;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
@@ -21,17 +22,31 @@ public class Inscription
 
 
     @Column( name = "id_student", nullable = false)
-    private Integer studentId;
+    private Integer studentId; //FK
 
     @Column( name = "id_course", nullable = false)
-    private Integer courseId;
+    private Integer courseId; //FK
 
     @Column( name = "inscription_date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date inscriptionDate;
 
 
+    //RELATIONS
 
-   //Constructors
+    // relationship with Course
+    @ManyToOne
+    @JoinColumn(name="fk_course", referencedColumnName = "id_course")
+    @JsonBackReference
+    Course course;
+
+    // relationship with student
+    @ManyToOne
+    @JoinColumn(name="fk_student", referencedColumnName = "id_student")
+    @JsonBackReference
+    Student student;
+
+
+    //Constructors
 
     public Inscription() {
     }
@@ -87,4 +102,3 @@ public class Inscription
 
 
 }
-
