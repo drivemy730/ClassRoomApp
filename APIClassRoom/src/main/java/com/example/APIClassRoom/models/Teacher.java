@@ -3,7 +3,9 @@ package com.example.APIClassRoom.models;
 import com.example.APIClassRoom.helpers.UserType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-
+import java.util.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Teacher
@@ -14,13 +16,21 @@ public class Teacher
     private Integer teacherId;
 
     @Column( name = "id_user", nullable = false)
-    private Integer userId;
+    private Integer userId; //FK
 
     @Column( length = 100, nullable = false)
     private String teacherSpecialty;
 
+    // Relationship with course
+
+    @OneToMany(mappedBy = "teacher")
+    @JsonManagedReference
+    private List<Course> courseList;
+
+
 
     //Constructor
+
     public Teacher() {
     }
 
