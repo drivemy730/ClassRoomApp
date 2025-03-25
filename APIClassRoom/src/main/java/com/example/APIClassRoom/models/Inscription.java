@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import jakarta.persistence.*;
+
 
 
 @Entity
@@ -12,25 +14,32 @@ public class Inscription
 {
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( name = "id_inscription")
     private Integer inscriptionId;
 
+
+    @Column( name = "id_student", nullable = false)
     private Integer studentId;
 
-    private String courseId;
+    @Column( name = "id_course", nullable = false)
+    private Integer courseId;
 
-    private String password;
+    @Column( name = "inscription_date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date inscriptionDate;
 
-   private Date inscriptionDate;
+
 
    //Constructors
-   public Inscription() {
-   }
 
-    public Inscription(Integer inscriptionId, Integer studentId, String courseId, String password, Date inscriptionDate) {
+    public Inscription() {
+    }
+
+    public Inscription(Integer inscriptionId, Integer studentId, Integer courseId, Date inscriptionDate) {
         this.inscriptionId = inscriptionId;
         this.studentId = studentId;
         this.courseId = courseId;
-        this.password = password;
         this.inscriptionDate = inscriptionDate;
     }
 
@@ -53,20 +62,12 @@ public class Inscription
         this.studentId = studentId;
     }
 
-    public String getCourseId() {
+    public Integer getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(Integer courseId) {
         this.courseId = courseId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Date getInscriptionDate() {
@@ -81,4 +82,9 @@ public class Inscription
 
 
 
+
+
+
+
 }
+
