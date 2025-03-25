@@ -2,6 +2,8 @@ package com.example.APIClassRoom.models;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
 
 @Entity
 public class Subject
@@ -9,11 +11,15 @@ public class Subject
 
 
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_subject")
     private Integer subjectId;
 
+    @Column( name = "subject_name", length = 100, nullable = false)
     private String subjectName;
 
+    @Column( name = "id_course", nullable = false)
     private Integer courseId;
 
 
