@@ -4,6 +4,11 @@ import com.example.APIClassRoom.helpers.UserType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 
 @Entity
 public class Student
@@ -23,9 +28,31 @@ public class Student
     @Temporal(TemporalType.DATE) // anotacion para guardar traducir solo fecha formato sin hora,min o segundos
     private Date studentBirthDate;
 
-    @Column( name = "student_adress", length = 100, nullable = false)
+    @Column( name = "student_address", length = 100, nullable = false)
     private String studentAddress;
 
+    //RELATIONS//
+
+    // relationship with user
+    @ManyToOne
+    @JoinColumn(name="fk_user", referencedColumnName = "id_user")
+    @JsonBackReference
+    User user;
+
+    // relationship with grade
+    @OneToMany(mappedBy = "student")
+    @JsonManagedReference
+    private List<Grade> gradeList;
+
+    // relationship with attendance
+    @OneToMany(mappedBy = "student")
+    @JsonManagedReference
+    private List<AttendanceRecord> attendanceRecordList;
+
+    // relationship with scription
+    @OneToMany(mappedBy = "student")
+    @JsonManagedReference
+    private List<Inscription> inscriptionList;
 
 
     //Constructors
