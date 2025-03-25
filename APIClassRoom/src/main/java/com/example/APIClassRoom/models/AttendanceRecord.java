@@ -2,7 +2,8 @@ package com.example.APIClassRoom.models;
 
 import com.example.APIClassRoom.helpers.AttendanceRecordState;
 import jakarta.persistence.Entity;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference; 
+import java.util.List;
 import java.util.Date;
 import jakarta.persistence.*;
 
@@ -18,10 +19,10 @@ public class AttendanceRecord
     private Integer attendanceId;
 
     @Column( name = "id_student", nullable = false)
-    private Integer studentId;
+    private Integer studentId; //FK
 
     @Column( name = "id_course", nullable = false)
-    private Integer courseId;
+    private Integer courseId; //FK
 
     @Column( name = "attendance_date", nullable = false)
     private Date attendanceDate;
@@ -30,6 +31,19 @@ public class AttendanceRecord
     @Enumerated(EnumType.STRING) // usé esta anotacion para que JPA traiga el string de la clase y no su posicion.
     private AttendanceRecordState attendanceRecordState;
 
+    //RELATIONS
+
+    //Relatioship with course
+    @ManyToOne
+    @JoinColumn(name="fk_course", referencedColumnName = "id_course")
+    @JsonBackReference
+    Course course;
+
+    //Relatioship with student
+    @ManyToOne
+    @JoinColumn(name="fk_student", referencedColumnName = "id_student")
+    @JsonBackReference
+    Student student;
 
     //Constructor
     public AttendanceRecord()
@@ -94,14 +108,6 @@ public class AttendanceRecord
 
 
 }
-
-
-
-
-
-
-
-
 
 
 
