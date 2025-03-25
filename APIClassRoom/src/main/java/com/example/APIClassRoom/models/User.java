@@ -3,6 +3,8 @@ package com.example.APIClassRoom.models;
 import com.example.APIClassRoom.helpers.UserType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class User
@@ -29,6 +31,13 @@ public class User
     @Enumerated(EnumType.STRING) // usé esta anotacion para que JPA traiga el string de la clase y no su posicion.
     private UserType userType;
 
+
+    //RELATIONS//
+
+    //relationship with Student
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<Student> studentList;
 
     // Constructors
     public User() {
