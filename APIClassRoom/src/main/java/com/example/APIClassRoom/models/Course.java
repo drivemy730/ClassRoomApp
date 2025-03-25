@@ -2,16 +2,22 @@ package com.example.APIClassRoom.models;
 
 import com.example.APIClassRoom.helpers.UserType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
 
 
 @Entity
 public class Course
 {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( name = "id_course")
     private Integer courseId;
 
+    @Column( name = "course_name", length = 100, nullable = false)
     private String courseName;
 
+    @Column( name = "id_teacher", nullable = false)
     private Integer teacherId;
 
 
