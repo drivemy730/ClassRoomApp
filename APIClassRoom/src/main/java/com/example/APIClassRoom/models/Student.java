@@ -2,23 +2,30 @@ package com.example.APIClassRoom.models;
 
 import com.example.APIClassRoom.helpers.UserType;
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Student
 {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_student")
     private Integer studentId;
 
-    private String name;
+    @Column( name = "id_user", nullable = false)
+    private Integer userId;
 
-    private String email;
+    @Column( name = "student_academic_year", nullable = false)
+    private Integer studentAcademicYear;
 
-    private String password;
+    @Column( name = "student_birth_date", nullable = false)
+    @Temporal(TemporalType.DATE) // anotacion para guardar traducir solo fecha formato sin hora,min o segundos
+    private Date studentBirthDate;
 
-    private String phoneNumber;
+    @Column( name = "student_adress", length = 100, nullable = false)
+    private String studentAddress;
 
-    private UserType userType;
 
 
     //Constructors
@@ -26,14 +33,14 @@ public class Student
     public Student() {
     }
 
-    public Student(Integer studentId, String name, String email, String password, String phoneNumber, UserType userType) {
+    public Student(Integer studentId, Integer userId, Integer studentAcademicYear, Date studentBirthDate, String studentAddress) {
         this.studentId = studentId;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.userType = userType;
+        this.userId = userId;
+        this.studentAcademicYear = studentAcademicYear;
+        this.studentBirthDate = studentBirthDate;
+        this.studentAddress = studentAddress;
     }
+
 
 
     //Getter and setters
@@ -46,45 +53,38 @@ public class Student
         this.studentId = studentId;
     }
 
-    public String getName() {
-        return name;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getEmail() {
-        return email;
+    public Integer getStudentAcademicYear() {
+        return studentAcademicYear;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStudentAcademicYear(Integer studentAcademicYear) {
+        this.studentAcademicYear = studentAcademicYear;
     }
 
-    public String getPassword() {
-        return password;
+    public Date getStudentBirthDate() {
+        return studentBirthDate;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setStudentBirthDate(Date studentBirthDate) {
+        this.studentBirthDate = studentBirthDate;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getstudentAddress() {
+        return studentAddress;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setstudentAddress(String studentAddress) {
+        this.studentAddress = studentAddress;
     }
 
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
 
 
 
