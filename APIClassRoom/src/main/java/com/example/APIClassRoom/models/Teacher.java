@@ -2,30 +2,33 @@ package com.example.APIClassRoom.models;
 
 import com.example.APIClassRoom.helpers.UserType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
 
 @Entity
 public class Teacher
 {
-
-
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( name = "id_teacher")
     private Integer teacherId;
 
+    @Column( name = "id_user", nullable = false)
     private Integer userId;
 
-    private String specialty;
+    @Column( length = 100, nullable = false)
+    private String teacherSpecialty;
+
 
     //Constructor
     public Teacher() {
     }
 
-    public Teacher(Integer teacherId, Integer userId, String specialty) {
+    public Teacher(Integer teacherId, Integer userId, String teacherSpecialty) {
         this.teacherId = teacherId;
         this.userId = userId;
-        this.specialty = specialty;
+        this.teacherSpecialty = teacherSpecialty;
     }
-
 
 
 
@@ -47,13 +50,12 @@ public class Teacher
         this.userId = userId;
     }
 
-    public String getSpecialty() {
-        return specialty;
+    public String getTeacherSpecialty() {
+        return teacherSpecialty;
     }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
+    public void setTeacherSpecialty(String teacherSpecialty) {
+        this.teacherSpecialty = teacherSpecialty;
     }
-
 
 }
